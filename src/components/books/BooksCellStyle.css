@@ -1,8 +1,8 @@
-.books_block {
+.books-block {
     text-align: center;
 }
 
-.book_cell {
+.book-cell {
     margin-bottom: 10px;
     border-bottom: 1px solid #eee;
 }
@@ -20,14 +20,14 @@
     max-height: 150px;
 }
 
-.book .book_image {
+.book .book-image {
     width: 100px;
     display: flex;
     justify-content: center;
     margin-right: 30px;
 }
 
-.book .book_description {
+.book .book-description {
 
 }
 

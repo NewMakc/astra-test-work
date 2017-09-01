@@ -44,9 +44,9 @@ class BooksList extends Component {
 
   render() {
     return (
-      <div className="books_block">
+      <div className="books-block">
         <input type="text" onChange={this.booksSearch}/>
-        <ul className="books_list">
+        <ul className="books-list">
           {
             this.state.books.map((book) => {
               return (
