@@ -3,23 +3,23 @@ import React, { Component } from 'react';
 import request from '../../utils/request'
 
 class SingleBook extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      book: {}
-    };
-  }
+        this.state = {
+            book: {}
+        };
+    }
 
-  componentDidMount() {
-    request('/api/book/' + this.props.match.params.id, (err, result) => {
-      if (err) return;
+    componentDidMount() {
+        request('/api/book/' + this.props.match.params.id, (err, result) => {
+            if (err) return;
 
-      this.setState({
-        book: result
-      });
-    });
-  }
+            this.setState({
+                book: result
+            });
+        });
+    }
 
 
     render() {
