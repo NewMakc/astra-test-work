@@ -22,33 +22,30 @@ class SingleBook extends Component {
   }
 
 
-  render() {
+    render() {
+        const {
+            imageLink,
+            author,
+            county,
+            language,
+            title,
+            year,
+            pages
+        } = this.state.book;
 
-    const {
-        imageLink,
-        author,
-        county,
-        language,
-        title,
-        year,
-        pages
-    } = this.state.book;
+        if (imageLink === undefined)
+            return (
+                <div>Loaing...</div>
+            )
 
-    console.log(this.state.book)
-
-      if (!imageLink)
         return (
-            <div>Loaing...</div>
+            <div className="single-book-page">
+            <img src={`../${imageLink}`}/>
+            <div>{`${title} - ${year} год, ${pages} страниц`}</div>
+            <div>{`${author}, ${county}, ${language}`}</div>
+            </div>
         )
-
-    return (
-      <div className="single-book-page">
-          <img src={ '../' + imageLink}/>
-          <div>{`${title} - ${year} год, ${pages} страниц`}</div>
-          <div>{`${author}, ${county}, ${language}`}</div>
-      </div>
-    )
-  }
+    }
 }
 
 export default SingleBook
