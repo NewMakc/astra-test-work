@@ -1,0 +1,40 @@
+.books_block {
+    text-align: center;
+}
+
+.book_cell {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.book {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-decoration: none;
+    color: #000
+}
+
+.book img {
+    max-height: 150px;
+}
+
+.book .book_image {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    margin-right: 30px;
+}
+
+.book .book_description {
+
+}
+
+.book .book-description h2 {
+    font-size: 20px;
+}
+
+.book .book-description h3 {
+    color: #777
+}
