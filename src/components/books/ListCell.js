@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './BooksCellStyle.css';
 
-class Book extends Component {
+class BookListCell extends Component {
   render() {
+
+    const {
+        id,
+        image,
+        author,
+        title
+    } = this.props;
+
     return (
-      <li className="book-cell">
-        <Link className="book" to={"/book/" + this.props.id}>
+      <li className="book-list-cell">
+        <Link className="book" to={`/book/${id}`}>
           <div className="book-image">
-            <img src={this.props.image}/>
+            <img src={image}/>
           </div>
           <div className="book-description">
-            <h2>{this.props.author}</h2>
-            <h3>{this.props.title}</h3>
+            <h2>{author}</h2>
+            <h3>{title}</h3>
           </div>
         </Link>
       </li>
-    )
+    );
   }
 }
 
-export default Book;
+export default BookListCell;

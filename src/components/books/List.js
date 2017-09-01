@@ -23,7 +23,7 @@ class BooksList extends Component {
 
       this.setState({
         books: result
-      })
+      });
     })
   }
 
@@ -39,7 +39,7 @@ class BooksList extends Component {
 
     this.setState({
       books: filteredBooks
-    })
+    });
   }
 
   render() {
@@ -62,7 +62,7 @@ class BooksList extends Component {
           }
         </ul>
       </div>
-    )
+    );
   }
 }
 

@@ -35,8 +35,8 @@ class SingleBook extends Component {
 
         if (imageLink === undefined)
             return (
-                <div>Loaing...</div>
-            )
+                <div>LOADING...</div>
+        );
 
         return (
             <div className="single-book-page">
@@ -44,7 +44,7 @@ class SingleBook extends Component {
             <div>{`${title} - ${year} год, ${pages} страниц`}</div>
             <div>{`${author}, ${county}, ${language}`}</div>
             </div>
-        )
+        );
     }
 }
 
