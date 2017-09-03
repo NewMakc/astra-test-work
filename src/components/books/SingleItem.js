@@ -1,51 +1,57 @@
 import React, { Component } from 'react';
 
-import request from '../../utils/request'
+import SingleBookActions from '../../actions/SingleBookActions';
+import SingleBookStore from '../../stores/SingleBookStore';
 
 class SingleBook extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            book: {}
-        };
-    }
+    this.state = SingleBookStore.getState();
 
-    componentDidMount() {
-        request('/api/book/' + this.props.match.params.id, (err, result) => {
-            if (err) return;
+    this.onChangeStore = this.onChangeStore.bind(this);
+  }
 
-            this.setState({
-                book: result
-            });
-        });
-    }
+  componentWillMount() {
+    SingleBookActions.getSingleBook(this.props.match.params.id);
+  }
 
+  componentDidMount() {
+    SingleBookStore.listen(this.onChangeStore);
+  }
 
-    render() {
-        const {
-            imageLink,
-            author,
-            county,
-            language,
-            title,
-            year,
-            pages
-        } = this.state.book;
+  componentWillUnmount() {
+    SingleBookStore.unlisten(this.onChangeStore);
+  }
 
-        if (imageLink === undefined)
-            return (
-                <div>LOADING...</div>
-        );
+  onChangeStore(state) {
+    this.setState(state);
+  }
 
-        return (
-            <div className="single-book-page">
-            <img src={`../${imageLink}`}/>
-            <div>{`${title} - ${year} год, ${pages} страниц`}</div>
-            <div>{`${author}, ${county}, ${language}`}</div>
-            </div>
-        );
-    }
+  render() {
+    const {
+      imageLink,
+      author,
+      county,
+      language,
+      title,
+      year,
+      pages
+    } = this.state.book;
+
+    if (imageLink === undefined)
+      return (
+        <div>LOADING...</div>
+      );
+
+    return (
+      <div className="single-book-page">
+          <img src={`../${imageLink}`}/>
+          <div>{`${title} - ${year} год, ${pages} страниц`}</div>
+          <div>{`${author}, ${county}, ${language}`}</div>
+      </div>
+    );
+  }
 }
 
 export default SingleBook

@@ -1,54 +1,50 @@
 import React, { Component } from 'react';
 import ListCell from './ListCell';
 
-import request from '../../utils/request';
+import BooksActions from '../../actions/BooksActions';
+import BooksStore from '../../stores/BooksStore';
 
 class BooksList extends Component {
   constructor(props) {
     super(props);
 
-    this.receivedBooks = [];
-    this.state = {
-      books: []
-    };
+    this.state = BooksStore.getState();
 
-    this.booksSearch = this.booksSearch.bind(this);
+    this.onChangeStore = this.onChangeStore.bind(this);
+    this.onBooksSearch = this.onBooksSearch.bind(this);
+  }
+
+  componentWillMount() {
+    BooksActions.getBooks();
   }
 
   componentDidMount() {
-    request('/api/all-books', (err, result) => {
-      if (err) return;
-
-      this.receivedBooks = result;
-
-      this.setState({
-        books: result
-      });
-    })
+    BooksStore.listen(this.onChangeStore);
   }
 
-  booksSearch(e) {
-    let searchValue = null;
+  componentWillUnmount() {
+    BooksStore.unlisten(this.onChangeStore);
+  }
 
+  onChangeStore(state) {
+    this.setState(state);
+  }
+
+  onBooksSearch(e) {
     const searchQuery = e.target.value.toLowerCase();
-    const filteredBooks = this.receivedBooks.filter((book) => {
-      searchValue = book.author.toLowerCase();
 
-      return searchValue.indexOf(searchQuery) !== -1
-    });
-
-    this.setState({
-      books: filteredBooks
-    });
+    BooksActions.searchBooks(searchQuery);
   }
 
   render() {
+    const { books } = this.state;
+
     return (
       <div className="books-block">
-        <input type="text" onChange={this.booksSearch}/>
+        <input type="text" onChange={this.onBooksSearch}/>
         <ul className="books-list">
           {
-            this.state.books.map((book) => {
+            books.map((book) => {
               return (
                 <ListCell
                   key={book.id}
