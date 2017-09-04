@@ -41,7 +41,7 @@ class BooksList extends Component {
 
     return (
       <div className="books-block">
-        <input type="text" onChange={this.onBooksSearch}/>
+        <input type="text" placeholder="search author" onChange={this.onBooksSearch}/>
         <ul className="books-list">
           {
             books.map((book) => {
